@@ -15,7 +15,8 @@
 #include "Memory/TWeakPointer.h"
 
 //Enums
-enum ShapeType {
+enum 
+ShapeType {
   NONE = 0,
   CIRCLE = 1,
   RECTANGLE = 2,

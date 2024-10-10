@@ -1,6 +1,7 @@
 #include "ShapeFactory.h"
 
-sf::Shape* ShapeFactory::createShape(ShapeType shapeType) {
+sf::Shape* ShapeFactory::
+createShape(ShapeType shapeType) {
   m_shapeType = shapeType;
   switch (shapeType) {
   case NONE: // Caso para "NONE", no hace nada y sigue adelante
@@ -34,7 +35,24 @@ sf::Shape* ShapeFactory::createShape(ShapeType shapeType) {
 
 void
 ShapeFactory::setPosition(float x, float y) {
-  m_shape->setPosition(x, y);
+  if (m_shape) {
+     m_shape->setPosition(x, y);
+  }
+  
+}
+
+void 
+ShapeFactory::setRotation(float angle){
+  if (m_shape) {
+    m_shape->setRotation(angle);
+  }
+}
+
+void 
+ShapeFactory::setScale(const sf::Vector2f& scl){
+  if (m_shape) {
+    m_shape->setScale(scl);
+  }
 }
 
 void
@@ -44,9 +62,14 @@ ShapeFactory::setFillColor(const sf::Color& color) {
 }
 void
 ShapeFactory::setPosition(const sf::Vector2f& position) {
-  m_shape->setPosition(position);
+  if (m_shape) {
+      m_shape->setPosition(position);
+  }
+  
 }
-void ShapeFactory::Seek(const sf::Vector2f& targetPosition,
+/*
+void
+ShapeFactory::Seek(const sf::Vector2f& targetPosition,
   float speed,
   float deltaTime,
   float range) {
@@ -67,5 +90,5 @@ void ShapeFactory::Seek(const sf::Vector2f& targetPosition,
     direction /= length;
     m_shape->move(direction * speed * deltaTime);
   }
-}
+}*/
 

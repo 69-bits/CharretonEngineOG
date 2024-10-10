@@ -1,37 +1,45 @@
 #pragma once
 class Window;
 
-enum ComponentType{
-	EMPTY = 0,
-	TRANSFORM = 1,
-	SPRITE = 2,
-	RENDERER = 3,
-	PHYSICS = 4,
-	AUDIOSOURCE = 5,
-	SHAPE = 6
+//Tipos de componentes
+enum
+  ComponentType {
+  EMPTY = 0,
+  TRANSFORM = 1,
+  SPRITE = 2,
+  RENDERER = 3,
+  PHYSICS = 4,
+  AUDIOSOURCE = 5,
+  SHAPE = 6
 };
 
-class 
-Component{
+//Clase base abstracta para todos los componentes del juego.
+class
+  Component {
 
 public:
-	Component() = default;
+  //Constructor por defecto.
+  Component() = default;
 
-	Component(const ComponentType type) : m_type(type){}
-	
+  //Constructor con tipo de componente.
+  Component(const ComponentType type) : m_type(type) {}
 
-	virtual 
-	~Component() = default;
+  //Destructor virtual.
+  virtual
+    ~Component() = default;
 
-	virtual void 
-	update(float deltatime) = 0;
+  // Método virtual puro para actualizar el componente.
+  virtual void
+    update(float deltatime) = 0;
 
-	virtual void 
-	render(Window window) = 0;
+  //Método virtual puro para renderizar el componente.
+  virtual void
+    render(Window window) = 0;
 
-	ComponentType
-		getType() const { return m_type; }
+  //Obtiene el tipo del componente.
+  ComponentType
+    getType() const { return m_type; }
 
 protected:
-	ComponentType m_type; //Tipo de componente
+  ComponentType m_type; //Tipo de componente
 };
