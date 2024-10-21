@@ -63,6 +63,11 @@ public:
   void
     destroy();
 
+  sf::Time deltaTime;
+  sf::Clock clock;
+
 private:
   sf::RenderWindow* m_window;
+  sf::View m_view;
+  
 };

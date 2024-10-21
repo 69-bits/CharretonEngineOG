@@ -39,6 +39,19 @@ public:
     scale = _scale;
   }
 
+  void
+    Seek(const sf::Vector2f& targetPosition,
+      float speed,
+      float deltaTime,
+      float range) {
+    sf::Vector2f direction = targetPosition - position;
+    float length = std::sqrt(direction.x * direction.x + direction.y * direction.y);
+    if (length > range) {
+      direction /= length;  // Normaliza el vector
+      position += direction * speed * deltaTime;
+    }
+  }
+
   sf::Vector2f&
   getPosition() {
     return position;
@@ -55,6 +68,7 @@ public:
   }
 
 private:
+  ShapeFactory* m_shape;
   sf::Vector2f position;
   sf::Vector2f rotation;
   sf::Vector2f scale;

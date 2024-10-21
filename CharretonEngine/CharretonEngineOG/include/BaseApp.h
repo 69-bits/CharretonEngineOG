@@ -35,8 +35,6 @@ public:
     patrolPattern(float deltaTime, EngineUtilities::TSharedPointer<Actor> circle);
 
 private:
-  sf::Time deltaTime;
-  sf::Clock clock;
 
   std::vector<sf::Vector2f> waypoints = {
         sf::Vector2f(100.0f, 200.0f),

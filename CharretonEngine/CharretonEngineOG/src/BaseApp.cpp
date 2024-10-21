@@ -7,7 +7,6 @@ BaseApp::run() {
   }
   while (m_window->isOpen()) {
     m_window->handleEvents();
-    deltaTime = clock.restart();
     update();
     render();
   }
@@ -38,7 +37,7 @@ BaseApp::initialize() {
     Circle->getComponent<ShapeFactory>()->setFillColor(sf::Color::Blue);
 
     Circle->getComponent<Transform>()->setPosition(sf::Vector2f(200.0f, 200.0f));
-    Circle->getComponent<Transform>()->setRotation(sf::Vector2f(200.0f, 200.0f));
+    Circle->getComponent<Transform>()->setRotation(sf::Vector2f(0.0f, 0.0f));
     Circle->getComponent<Transform>()->setScale(sf::Vector2f(1.0f, 1.0f));
   }
 
@@ -58,14 +57,17 @@ BaseApp::initialize() {
 void
 BaseApp::update() {
 
+  //Update window method
+  m_window->update();
+
   /*sf::Vector2i mousePosition = sf::Mouse::getPosition(*m_window->getWindow());
   sf::Vector2f mousePosF(static_cast<float>(mousePosition.x),
     static_cast<float>(mousePosition.y));*/
 
 
   if (!Circle.isNull()) {
-    Circle->update(deltaTime.asSeconds());
-    patrolPattern(deltaTime.asSeconds(), Circle);
+    Circle->update(m_window->deltaTime.asSeconds());
+    patrolPattern(m_window->deltaTime.asSeconds(), Circle);
   }
 }
 
@@ -79,7 +81,10 @@ BaseApp::render() {
   if (!Circle.isNull()) {
     Circle->render(*m_window);
   }
-
+  ImGui::Begin("DONDE ESTAN LAS QUE PELAN TOMATEEEEE, pregunta el Begin");
+  ImGui::Text("Aqui ando, responde el Text");
+  ImGui::End();
+  m_window->render();
   m_window->display();
 }
 
@@ -93,13 +98,20 @@ BaseApp::cleanup() {
 void
 BaseApp::patrolPattern(float deltaTime, EngineUtilities::TSharedPointer<Actor> circulo) {
 
-  if (!circulo || circulo.isNull()) return;
+  if (!circulo || circulo.isNull()) {
+    return;
+  }
+
+  auto transform = circulo->getComponent<Transform>();
+  if (transform.isNull()) {
+    return;
+  }
 
   sf::Vector2f targetPos = waypoints[currentPoint];
 
-  circulo->getComponent<ShapeFactory>()->Seek(targetPos, 200.0f, deltaTime, 10.0f);
+  transform->Seek(targetPos, 200.0f, deltaTime, 10.0f);
 
-  sf::Vector2f currentPos = circulo->getComponent<ShapeFactory>()->getShape()->getPosition();
+  sf::Vector2f currentPos = transform->getPosition();
 
   float distanceToTarget = std::sqrt(std::pow(targetPos.x - currentPos.x, 2) + std::pow(targetPos.y - currentPos.y, 2));
 

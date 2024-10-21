@@ -42,11 +42,11 @@ public:
   void
     setPosition(const sf::Vector2f& position);
 
-  /*void
-    Seek(const sf::Vector2f& targetPosition,
-      float speed,
-      float deltaTime,
-      float range);*/
+  //void
+  //  Seek(const sf::Vector2f& targetPosition,
+  //    float speed,
+  //    float deltaTime,
+  //    float range);
 
 
   //Renderiza el componente de malla.

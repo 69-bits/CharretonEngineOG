@@ -14,6 +14,10 @@
 #include "Memory/TUniquePtr.h"
 #include "Memory/TWeakPointer.h"
 
+//ImGui
+#include <imgui.h>
+#include <imgui-SFML.h>
+
 //Enums
 enum 
 ShapeType {

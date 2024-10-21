@@ -67,28 +67,28 @@ ShapeFactory::setPosition(const sf::Vector2f& position) {
   }
   
 }
-/*
-void
-ShapeFactory::Seek(const sf::Vector2f& targetPosition,
-  float speed,
-  float deltaTime,
-  float range) {
 
-  //obtener la posicion actual de la shape sea la que sea
-  sf::Vector2f shapePosition = m_shape->getPosition();
-
-
-  //Calcular la direccion desde el circulo hacia el objetivo
-  sf::Vector2f direction = targetPosition - shapePosition;
-
-
-  //Calcular distacnia al objectivo
-  float length = std::sqrt(direction.x * direction.x + direction.y * direction.y);
-
-  //Si la distancia es mayor al rango, mover la shape al objetivo
-  if (length > range) {
-    direction /= length;
-    m_shape->move(direction * speed * deltaTime);
-  }
-}*/
+//void
+//ShapeFactory::Seek(const sf::Vector2f& targetPosition,
+//  float speed,
+//  float deltaTime,
+//  float range) {
+//
+//  //obtener la posicion actual de la shape sea la que sea
+//  sf::Vector2f shapePosition = m_shape->getPosition();
+//
+//
+//  //Calcular la direccion desde el circulo hacia el objetivo
+//  sf::Vector2f direction = targetPosition - shapePosition;
+//
+//
+//  //Calcular distacnia al objectivo
+//  float length = std::sqrt(direction.x * direction.x + direction.y * direction.y);
+//
+//  //Si la distancia es mayor al rango, mover la shape al objetivo
+//  if (length > range) {
+//    direction /= length;
+//    m_shape->move(direction * speed * deltaTime);
+//  }
+//}
 
