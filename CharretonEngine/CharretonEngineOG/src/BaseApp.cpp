@@ -17,7 +17,7 @@ BaseApp::run() {
 
 bool
 BaseApp::initialize() {
-  m_window = new Window(800, 600, "Galvan Engine");
+  m_window = new Window(800, 600, "Charreton Engine OG");
   if (!m_window) {
     ERROR("BaseApp", "initialize", "Error on window creation, var is null");
     return false;
@@ -29,28 +29,41 @@ BaseApp::initialize() {
     return false;
   }
 
+  // Circuit Actor
+  Circuit = EngineUtilities::MakeShared<Actor>("Circuit");
+  if (!Circuit.isNull()) {
+    Circuit->getComponent<ShapeFactory>()->createShape(ShapeType::RECTANGLE);
+    //Circle->getComponent<ShapeFactory>()->setFillColor(sf::Color::Blue);
 
-  // Triangle Actor
-  Circle = EngineUtilities::MakeShared<Actor>("Circle");
-  if (!Circle.isNull()) {
-    Circle->getComponent<ShapeFactory>()->createShape(ShapeType::CIRCLE);
-    Circle->getComponent<ShapeFactory>()->setFillColor(sf::Color::Blue);
+    Circuit->getComponent<Transform>()->setPosition(sf::Vector2f(10, 10.0f));
+    Circuit->getComponent<Transform>()->setRotation(sf::Vector2f(0.0f, 0.0f));
+    Circuit->getComponent<Transform>()->setScale(sf::Vector2f(5.0f, 10.0f));
 
-    Circle->getComponent<Transform>()->setPosition(sf::Vector2f(200.0f, 200.0f));
-    Circle->getComponent<Transform>()->setRotation(sf::Vector2f(0.0f, 0.0f));
-    Circle->getComponent<Transform>()->setScale(sf::Vector2f(1.0f, 1.0f));
+    if (!texture.loadFromFile("Circuit.png")) {
+      std::cout << "Error de carga de textura" << std::endl;
+      return -1; //Manejar error de carga
+    }
+
+    Circuit->getComponent<ShapeFactory>()->getShape()->setTexture(&texture);
   }
 
 
+  // Circle Actor
+  Circle = EngineUtilities::MakeShared<Actor>("Circle");
+  if (!Circle.isNull()) {
+    Circle->getComponent<ShapeFactory>()->createShape(ShapeType::CIRCLE);
+    Circle->getComponent<ShapeFactory>()->setFillColor(sf::Color::Magenta);
+
+    Circle->getComponent<Transform>()->setPosition(sf::Vector2f(280.0f, 460.0f));
+    Circle->getComponent<Transform>()->setRotation(sf::Vector2f(0.0f, 0.0f));
+    Circle->getComponent<Transform>()->setScale(sf::Vector2f(1.0f, 1.0f));
+  }
 
   // Triangle Actor
   Triangle = EngineUtilities::MakeShared<Actor>("Triangle");
   if (!Triangle.isNull()) {
     Triangle->getComponent<ShapeFactory>()->createShape(ShapeType::TRIANGLE);
   }
-
-
-
   return true;
 }
 
@@ -64,6 +77,9 @@ BaseApp::update() {
   sf::Vector2f mousePosF(static_cast<float>(mousePosition.x),
     static_cast<float>(mousePosition.y));*/
 
+  if (!Circuit.isNull()) {
+    Circuit->update(m_window->deltaTime.asSeconds());
+  }
 
   if (!Circle.isNull()) {
     Circle->update(m_window->deltaTime.asSeconds());
@@ -78,11 +94,15 @@ BaseApp::render() {
   if (!Triangle.isNull()) {
     Triangle->render(*m_window);
   }
+  if (!Circuit.isNull()) {
+    Circuit->render(*m_window);
+  }
   if (!Circle.isNull()) {
     Circle->render(*m_window);
   }
   ImGui::Begin("DONDE ESTAN LAS QUE PELAN TOMATEEEEE, pregunta el Begin");
   ImGui::Text("Aqui ando, responde el Text");
+  ImGui::Image(texture);
   ImGui::End();
   m_window->render();
   m_window->display();
