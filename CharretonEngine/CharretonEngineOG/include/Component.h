@@ -10,7 +10,8 @@ enum
   RENDERER = 3,
   PHYSICS = 4,
   AUDIOSOURCE = 5,
-  SHAPE = 6
+  SHAPE = 6,
+  TEXTURE = 7
 };
 
 //Clase base abstracta para todos los componentes del juego.
