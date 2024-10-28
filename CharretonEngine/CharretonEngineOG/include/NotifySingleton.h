@@ -30,7 +30,7 @@ public:
 
   void 
   notify(ConsoleErrorType msgType, const std::string& _msg) {
-
+ 
     GUI* gui;
     gui->console(m_programMessage);
   }
