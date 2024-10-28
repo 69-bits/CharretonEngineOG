@@ -1,10 +1,17 @@
 #include "BaseApp.h"
+#include "NotifySingleton.h"
+
+NotifySingleton* NotifySingleton::m_instance = nullptr;
 
 int
 BaseApp::run() {
+  NotifySingleton* noty = NotifySingleton::getInstance();
+
   if (!initialize()) {
-    ERROR("BaseApp", "run", "Initializes result on a false statemente, check method validations");
+    /*ERROR("BaseApp", "run", "Initializes result on a false statemente, check method validations");*/
+    noty->addMessage(ConsoleErrorType::ERROR,"Initializes result on a false statemente, check method validations");
   }
+  m_GUI.init();
   while (m_window->isOpen()) {
     m_window->handleEvents();
     update();
@@ -17,7 +24,8 @@ BaseApp::run() {
 
 bool
 BaseApp::initialize() {
-  m_window = new Window(800, 600, "Charreton Engine OG");
+  NotifySingleton* noty = NotifySingleton::getInstance();
+  m_window = new Window(1920, 1080, "Charreton Engine OG");
   if (!m_window) {
     ERROR("BaseApp", "initialize", "Error on window creation, var is null");
     return false;
@@ -39,8 +47,8 @@ BaseApp::initialize() {
     Circuit->getComponent<Transform>()->setRotation(sf::Vector2f(0.0f, 0.0f));
     Circuit->getComponent<Transform>()->setScale(sf::Vector2f(5.0f, 10.0f));
 
-    if (!texture.loadFromFile("Circuit.png")) {
-      std::cout << "Error de carga de textura" << std::endl;
+    if (!texture.loadFromFile("pingui.png")) {
+      noty->addMessage(ConsoleErrorType::WARNING, "Esa textura no existe");
       return -1; //Manejar error de carga
     }
 
@@ -52,11 +60,18 @@ BaseApp::initialize() {
   Circle = EngineUtilities::MakeShared<Actor>("Circle");
   if (!Circle.isNull()) {
     Circle->getComponent<ShapeFactory>()->createShape(ShapeType::CIRCLE);
-    Circle->getComponent<ShapeFactory>()->setFillColor(sf::Color::Magenta);
+    //Circle->getComponent<ShapeFactory>()->setFillColor(sf::Color::Magenta);
 
     Circle->getComponent<Transform>()->setPosition(sf::Vector2f(280.0f, 460.0f));
     Circle->getComponent<Transform>()->setRotation(sf::Vector2f(0.0f, 0.0f));
     Circle->getComponent<Transform>()->setScale(sf::Vector2f(1.0f, 1.0f));
+
+    if (!shyGuy.loadFromFile("sprites/tile016.png")) {
+      std::cout << "Error de carga de textura" << std::endl;
+      return -1; //Manejar error de carga
+    }
+
+    Circle->getComponent<ShapeFactory>()->getShape()->setTexture(&shyGuy);
   }
 
   // Triangle Actor
@@ -89,6 +104,7 @@ BaseApp::update() {
 
 void
 BaseApp::render() {
+  NotifySingleton* noty = NotifySingleton::getInstance();
   m_window->clear();
   m_window->draw(*shape);
   if (!Triangle.isNull()) {
@@ -100,10 +116,10 @@ BaseApp::render() {
   if (!Circle.isNull()) {
     Circle->render(*m_window);
   }
-  ImGui::Begin("DONDE ESTAN LAS QUE PELAN TOMATEEEEE, pregunta el Begin");
-  ImGui::Text("Aqui ando, responde el Text");
-  ImGui::Image(texture);
-  ImGui::End();
+  // Mostrar el render en ImGui
+  m_window->renderToTexture();  // Finaliza el render a la textura
+  m_window->showInImGui();      // Muestra la textura en ImGui
+  m_GUI.console(noty->showNotification());
   m_window->render();
   m_window->display();
 }
@@ -112,7 +128,6 @@ void
 BaseApp::cleanup() {
   m_window->destroy();
   delete m_window;
-  delete shape;
 }
 
 void

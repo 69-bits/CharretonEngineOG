@@ -4,18 +4,42 @@ Window::Window(int width, int height, const std::string& title) {
   m_window = new sf::RenderWindow(sf::VideoMode(width, height), title);
 
   if (!m_window) {
-    ERROR("Window", "Window", "CHECK CONSTRUCTOR");
+    ERROR("Window", "RenderTexture", "CHECK CREATION");
   }
   else {
     MESSAGE("Window", "Window", "OK");
   }
   //Initialize
   ImGui::SFML::Init(*m_window); //Inicializar ImGui
+
+  // Crear RenderTexture con las mismas dimensiones que la ventana
+  if (!m_renderTexture.create(width, height)) {
+    ERROR("Window", "RenderTexture", "CHECK CREATION");
+  }
 }
 
 Window::~Window() {
   ImGui::SFML::Shutdown();
   delete m_window;
+}
+
+void 
+Window::renderToTexture() {
+  // Después de renderizar todo lo que quieras en la textura
+  m_renderTexture.display();
+}
+
+void 
+Window::showInImGui() {
+  const sf::Texture& texture = m_renderTexture.getTexture();
+
+  // Obtener el tamaño de la textura
+  ImVec2 size(texture.getSize().x, texture.getSize().y);
+
+  // Renderizar la textura en ImGui con las coordenadas UV invertidas en el eje Y
+  ImGui::Begin("Scene");
+  ImGui::Image((void*)(intptr_t)texture.getNativeHandle(), size, ImVec2(0, 1), ImVec2(1, 0));
+  ImGui::End();
 }
 
 void
@@ -36,6 +60,8 @@ Window::handleEvents() {
       m_view = m_window->getView();
       m_view.setSize(static_cast<float>(width), static_cast<float>(height));
       m_window->setView(m_view);
+      // Actualizar RenderTexture si la ventana cambia de tamaño
+      m_renderTexture.create(width, height);
       break;
     }
   }
@@ -48,6 +74,9 @@ Window::clear() {
   }
   else {
     ERROR("Window", "clear", "CHECK FOR WINDOW POINTER DATA");
+  }
+  if (m_renderTexture.getSize().x > 0 && m_renderTexture.getSize().y > 0) {
+    m_renderTexture.clear();
   }
 }
 
@@ -79,6 +108,10 @@ Window::draw(const sf::Drawable& drawable) {
   }
   else {
     ERROR("Window", "draw", "CHECK FOR WINDOW POINTER DATA");
+  }
+  // Dibujar en la RenderTexture en lugar de la ventana directamente
+  if (m_renderTexture.getSize().x > 0 && m_renderTexture.getSize().y > 0) {
+    m_renderTexture.draw(drawable);
   }
 }
 

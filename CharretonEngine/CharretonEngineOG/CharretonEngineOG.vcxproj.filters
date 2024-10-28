@@ -60,6 +60,9 @@
     <ClCompile Include="..\ThirdParties\imgui-sfml-2.6.x\imgui-SFML.cpp">
       <Filter>ImGui</Filter>
     </ClCompile>
+    <ClCompile Include="src\GUI.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Memory\TSharedPointer.h">
@@ -135,6 +138,12 @@
       <Filter>ImGui</Filter>
     </ClInclude>
     <ClInclude Include="Texture.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GUI.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="include\NotifySingleton.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>

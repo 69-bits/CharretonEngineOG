@@ -13,6 +13,7 @@
 #include "Memory/TStaticPtr.h"
 #include "Memory/TUniquePtr.h"
 #include "Memory/TWeakPointer.h"
+#include <map>
 
 //ImGui
 #include <imgui.h>
@@ -25,6 +26,12 @@ ShapeType {
   CIRCLE = 1,
   RECTANGLE = 2,
   TRIANGLE = 3
+};
+
+enum ConsoleErrorType {
+  NORMAL = 0,
+  WARNING = 1,
+  ERROR = 2
 };
 
 // MACRO for safe release of resources

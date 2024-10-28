@@ -2,6 +2,8 @@
 #include "Prerequisites.h"
 #include "Window.h"
 #include "Actor.h"
+#include "GUI.h"
+
 
 class
   BaseApp {
@@ -36,7 +38,11 @@ public:
 
 private:
 
+  sf::Texture shyGuy;
+
   sf::Texture texture;
+
+  GUI m_GUI;
 
   std::vector<sf::Vector2f> waypoints = {
         sf::Vector2f(280.0f, 460.0f),

@@ -1,12 +1,16 @@
 #pragma once
 #include "Prerequisites.h"
-
 class
   Window {
 public:
   Window() = default;
   Window(int width, int height, const std::string& title);
   ~Window();
+
+  void
+    renderToTexture();
+  void
+    showInImGui();
 
   void
     handleEvents();
@@ -65,6 +69,7 @@ public:
 
   sf::Time deltaTime;
   sf::Clock clock;
+  sf::RenderTexture m_renderTexture;
 
 private:
   sf::RenderWindow* m_window;

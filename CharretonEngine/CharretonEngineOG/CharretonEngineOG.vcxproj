@@ -184,6 +184,7 @@
     <ClCompile Include="src\Actor.cpp" />
     <ClCompile Include="src\BaseApp.cpp" />
     <ClCompile Include="src\CharretonEngineOG.cpp" />
+    <ClCompile Include="src\GUI.cpp" />
     <ClCompile Include="src\ShapeFactory.cpp" />
     <ClCompile Include="src\Window.cpp" />
   </ItemGroup>
@@ -202,10 +203,12 @@
     <ClInclude Include="include\BaseApp.h" />
     <ClInclude Include="include\Component.h" />
     <ClInclude Include="include\Entity.h" />
+    <ClInclude Include="include\GUI.h" />
     <ClInclude Include="include\Memory\TSharedPointer.h" />
     <ClInclude Include="include\Memory\TStaticPtr.h" />
     <ClInclude Include="include\Memory\TUniquePtr.h" />
     <ClInclude Include="include\Memory\TWeakPointer.h" />
+    <ClInclude Include="include\NotifySingleton.h" />
     <ClInclude Include="include\Prerequisites.h" />
     <ClInclude Include="include\Rasterizer.h" />
     <ClInclude Include="include\ShapeFactory.h" />
