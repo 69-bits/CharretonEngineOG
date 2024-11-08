@@ -14,11 +14,11 @@ public:
 
   //Método virtual puro para actualizar la entidad.
   virtual void
-    update(float deltaTime) = 0;
+  update(float deltaTime) = 0;
 
   //Método virtual puro para renderizar la entidad.
   virtual void
-    render(Window& window) = 0;
+  render(Window& window) = 0;
 
   //Agrega un componente a la entidad.
   template<typename T>

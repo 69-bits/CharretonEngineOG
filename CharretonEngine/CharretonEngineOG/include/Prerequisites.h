@@ -19,7 +19,7 @@
 #include <imgui.h>
 #include <imgui-SFML.h>
 
-//Enums
+//Enum de tipo de formas
 enum 
 ShapeType {
   NONE = 0,
@@ -28,6 +28,7 @@ ShapeType {
   TRIANGLE = 3
 };
 
+//Enum de tipo de errores
 enum ConsoleErrorType {
   NORMAL = 0,
   WARNING = 1,

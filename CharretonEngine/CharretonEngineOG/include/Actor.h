@@ -4,50 +4,76 @@
 #include "ShapeFactory.h"
 #include "Transform.h"
 
+/**
+ * @class Actor
+ * @brief Representa un actor en la escena, hereda de la clase Entity y contiene componentes como ShapeFactory y Transform.
+ */
 class Actor : Entity {
 public:
-  //Constructor por defecto.
+  /**
+   * @brief Constructor por defecto.
+   */
   Actor() = default;
 
+  /**
+   * @brief Constructor que inicializa el actor con un nombre específico.
+   * @param actorName Nombre del actor.
+   */
   Actor(std::string actorName);
 
-  //Destructor virtual
-  virtual
-    ~Actor() = default;
+  /**
+   * @brief Destructor virtual de Actor.
+   */
+  virtual 
+  ~Actor() = default;
 
-  //Actualiza el actor.
-  void
-    update(float deltaTime) override;
+  /**
+   * @brief Actualiza el estado del actor.
+   * @param deltaTime Tiempo transcurrido desde la última actualización.
+   */
+  void 
+  update(float deltaTime) override;
 
-  //Renderiza el actor.
-  void
-    render(Window& window) override; // @param window Contexto del dispositivo para operaciones gr?ficas.
+  /**
+   * @brief Renderiza el actor en el contexto de la ventana.
+   * @param window Referencia a la ventana donde se realizan las operaciones gráficas.
+   */
+  void 
+  render(Window& window) override;
 
-  //Funcion para limpiar
-  void
-    destroy(); // @brief Destruye el actor y libera los recursos asociados.
+  /**
+   * @brief Destruye el actor y libera los recursos asociados.
+   */
+  void 
+  destroy();
 
-  // @brief Obtiene un componente espec?fico del actor.
-  // @param T Tipo del componente que se va a obtener.
-  // @return Puntero compartido al componente, o nullptr si no se encuentra.
+  /**
+   * @brief Obtiene un componente específico del actor, basado en el tipo T.
+   *
+   * Esta función utiliza el tipo de dato especificado como parámetro para buscar
+   * entre los componentes del actor y devolver el componente solicitado, si existe.
+   *
+   * @tparam T Tipo del componente que se desea obtener.
+   * @return EngineUtilities::TSharedPointer<T> Puntero compartido al componente, o un TSharedPointer vacío si no se encuentra.
+   */
   template <typename T>
-  EngineUtilities::TSharedPointer<T>
-    getComponent(); //Llamar una funcion InLine :p
+  EngineUtilities::TSharedPointer<T> getComponent();
+
+  std::string m_name = "Actor"; ///< Nombre del actor.
 
 private:
-  std::string m_name = "Actor"; //Nombre del actor
-
-
+  // Aquí puedes agregar variables privadas y métodos si es necesario en el futuro
 };
+
+
 template<typename T>
-inline EngineUtilities::TSharedPointer<T>
-Actor::getComponent() {
+inline EngineUtilities::TSharedPointer<T> Actor::getComponent() {
   for (auto& component : components) {
     EngineUtilities::TSharedPointer<T> specificComponent = component.template dynamic_pointer_cast<T>();
     if (specificComponent) {
       return specificComponent;
     }
   }
-  // Devuelve un TSharedPointer vac?o si no se encuentra el componente
+  // Devuelve un TSharedPointer vacío si no se encuentra el componente
   return EngineUtilities::TSharedPointer<T>();
 }
