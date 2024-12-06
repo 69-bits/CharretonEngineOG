@@ -1,15 +1,6 @@
 #include "ShapeFactory.h"
 
-/**
- * @brief Crea una forma gráfica según el tipo especificado.
- *
- * Este método configura la forma (`m_shape`) en función del tipo `ShapeType` proporcionado.
- * Se crean diferentes tipos de `sf::Shape` como círculo, rectángulo, y triángulo, y cada forma
- * se inicializa con un color blanco.
- *
- * @param shapeType Tipo de forma a crear (e.g., CIRCLE, RECTANGLE, TRIANGLE).
- * @return Puntero a la forma creada (`sf::Shape*`), o `nullptr` si el tipo es `NONE` o no se reconoce.
- */
+
 sf::Shape* ShapeFactory::createShape(ShapeType shapeType) {
   m_shapeType = shapeType;
   switch (shapeType) {
@@ -42,11 +33,6 @@ sf::Shape* ShapeFactory::createShape(ShapeType shapeType) {
   }
 }
 
-/**
- * @brief Establece la posición de la forma.
- * @param x Coordenada X de la posición.
- * @param y Coordenada Y de la posición.
- */
 void 
 ShapeFactory::setPosition(float x, float y) {
   if (m_shape) {
@@ -54,10 +40,6 @@ ShapeFactory::setPosition(float x, float y) {
   }
 }
 
-/**
- * @brief Establece la rotación de la forma.
- * @param angle Ángulo de rotación en grados.
- */
 void 
 ShapeFactory::setRotation(float angle) {
   if (m_shape) {
@@ -65,21 +47,13 @@ ShapeFactory::setRotation(float angle) {
   }
 }
 
-/**
- * @brief Escala la forma en función de un vector de escala.
- * @param scl Vector de escala (X e Y).
- */
 void 
-ShapeFactory::setScale(const sf::Vector2f& scl) {
+ShapeFactory::setScale(const Vector2& scl) {
   if (m_shape) {
-    m_shape->setScale(scl);
+    m_shape->setScale(scl.x, scl.y); // Conversión explícita
   }
 }
 
-/**
- * @brief Establece el color de relleno de la forma.
- * @param color Color a aplicar a la forma.
- */
 void 
 ShapeFactory::setFillColor(const sf::Color& color) {
   if (m_shape) {
@@ -87,13 +61,10 @@ ShapeFactory::setFillColor(const sf::Color& color) {
   }
 }
 
-/**
- * @brief Establece la posición de la forma usando un vector.
- * @param position Vector que contiene las coordenadas X e Y de la posición.
- */
-void 
-ShapeFactory::setPosition(const sf::Vector2f& position) {
+void
+ShapeFactory::setPosition(const Vector2& position) {
   if (m_shape) {
-    m_shape->setPosition(position);
+    m_shape->setPosition(position.x, position.y);
   }
 }
+

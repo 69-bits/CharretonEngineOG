@@ -25,6 +25,12 @@
     <Filter Include="ImGui">
       <UniqueIdentifier>{14577b80-f900-4a15-ad0c-998cf6ef23fb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Archivos de encabezado\Services">
+      <UniqueIdentifier>{dd638d3c-1ca3-4780-b562-812fd81fc7bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\Vectors">
+      <UniqueIdentifier>{f4f10c8e-03ef-410c-90f4-0242aeed0871}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Actor.cpp">
@@ -92,16 +98,10 @@
     <ClInclude Include="include\Prerequisites.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="include\Rasterizer.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
     <ClInclude Include="include\ShapeFactory.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="include\Transform.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Vector2.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="include\Window.h">
@@ -137,14 +137,32 @@
     <ClInclude Include="..\ThirdParties\imgui-sfml-2.6.x\imstb_truetype.h">
       <Filter>ImGui</Filter>
     </ClInclude>
-    <ClInclude Include="Texture.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
     <ClInclude Include="include\GUI.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="include\NotifySingleton.h">
+    <ClInclude Include="include\Texture.h">
       <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Vectors\Vector2.h">
+      <Filter>Archivos de encabezado\Vectors</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Vectors\MathUtility.h">
+      <Filter>Archivos de encabezado\Vectors</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Services\ResourceManager.h">
+      <Filter>Archivos de encabezado\Services</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Services\NotifySingleton.h">
+      <Filter>Archivos de encabezado\Services</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Vectors\Vector3.h">
+      <Filter>Archivos de encabezado\Vectors</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Vectors\Vector4.h">
+      <Filter>Archivos de encabezado\Vectors</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Vectors\Quaternion.h">
+      <Filter>Archivos de encabezado\Vectors</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

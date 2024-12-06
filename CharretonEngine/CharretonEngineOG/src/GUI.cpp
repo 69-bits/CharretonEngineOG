@@ -1,41 +1,27 @@
 #include "GUI.h"
 #include "Window.h"
 #include "NotifySingleton.h"
+#include "imgui_internal.h"
 
-/**
- * @brief Inicializa la GUI configurando el estilo visual.
- */
+
+
 void 
 GUI::init() {
   setupGUIStyle();
 }
 
-/**
- * @brief Actualiza el estado de la GUI (sin implementación en esta versión).
- */
 void 
 GUI::update() {
 }
 
-/**
- * @brief Renderiza los elementos de la GUI (sin implementación en esta versión).
- */
 void 
 GUI::render() {
 }
 
-/**
- * @brief Libera los recursos asociados a la GUI.
- */
 void 
 GUI::destroy() {
 }
 
-/**
- * @brief Configura el estilo visual de la GUI.
- *
- * Define el tamaño de los bordes y los colores personalizados para elementos de la GUI.
- */
 void 
 GUI::setupGUIStyle() {
   ImGuiStyle& style = ImGui::GetStyle();
@@ -50,19 +36,10 @@ GUI::setupGUIStyle() {
   colors[ImGuiCol_TitleBgActive] = ImVec4(0.9f, 0.5f, 0.0f, 1.0f); // Fondo del título activo
 }
 
-/**
- * @brief Muestra una lista jerárquica de actores en la escena.
- *
- * Esta función crea una ventana de jerarquía en ImGui donde se listan todos los actores
- * creados en la escena, permitiendo la selección de un actor específico y la manipulación de sus propiedades.
- *
- * @param m_actores Vector de actores presentes en la escena.
- */
 void 
 GUI::hierarchy(const std::vector<EngineUtilities::TSharedPointer<Actor>>& m_actores) {
   ImGui::Begin("Hierarchy");
 
-  static int selectedActorIndex = -1;
   ImGui::TextColored(ImVec4(1, 0, 1, 1), "%s", "Objetos creados en escena:\n");
 
   for (size_t i = 0; i < m_actores.size(); ++i) {
@@ -73,42 +50,9 @@ GUI::hierarchy(const std::vector<EngineUtilities::TSharedPointer<Actor>>& m_acto
       }
     }
   }
-
-  if (selectedActorIndex >= 0 && selectedActorIndex < static_cast<int>(m_actores.size())) {
-    auto& selectedActor = m_actores[selectedActorIndex];
-    if (selectedActor) {
-      ImGui::Separator();
-      ImGui::Text("Propiedades del Actor seleccionado:");
-
-      // Modificación de posición y escala
-      sf::Vector2f position = selectedActor->getComponent<Transform>()->getPosition();
-      if (ImGui::DragFloat2("Position", reinterpret_cast<float*>(&position), 1.0f)) {
-        selectedActor->getComponent<Transform>()->setPosition(position);
-      }
-      sf::Vector2f scale = selectedActor->getComponent<Transform>()->getScale();
-      if (ImGui::DragFloat2("Scale", reinterpret_cast<float*>(&scale), 1.0f)) {
-        selectedActor->getComponent<Transform>()->setScale(scale);
-      }
-
-      static int currentShapeTypeIndex = 0;
-      const char* shapeTypes[] = { "EMPTY", "CIRCLE", "RECTANGLE", "TRIANGLE" };
-
-      if (ImGui::Combo("Shape Type", &currentShapeTypeIndex, shapeTypes, IM_ARRAYSIZE(shapeTypes))) {
-        ShapeType selectedShapeType = static_cast<ShapeType>(currentShapeTypeIndex);
-        selectedActor->getComponent<ShapeFactory>()->createShape(selectedShapeType);
-      }
-    }
-  }
   ImGui::End();
 }
 
-/**
- * @brief Muestra una consola en la GUI con mensajes clasificados por tipo de error.
- *
- * Los mensajes se muestran en colores específicos según el tipo: verde para normal, naranja para advertencia y rojo para error.
- *
- * @param m_programMessage Mapa de mensajes clasificados por tipo de error.
- */
 void 
 GUI::console(std::map<ConsoleErrorType, std::vector<std::string>> m_programMessage) {
   ImGui::Begin("Console");
@@ -136,14 +80,6 @@ GUI::console(std::map<ConsoleErrorType, std::vector<std::string>> m_programMessa
   ImGui::End();
 }
 
-/**
- * @brief Generador de actores en la GUI, permite crear diferentes tipos de actores (círculo, rectángulo, triángulo).
- *
- * Cada tipo de actor tiene un botón en la GUI para su creación, y se le asigna un nombre único
- * con un sufijo numérico para evitar conflictos de ID.
- *
- * @param m_actores Vector de actores donde se agregan los nuevos actores creados.
- */
 #include "NotifySingleton.h"
 
 void
@@ -166,9 +102,9 @@ GUI::actor(std::vector<EngineUtilities::TSharedPointer<Actor>>& m_actores) {
       DAm->getComponent<ShapeFactory>()->createShape(ShapeType::CIRCLE);
       DAm->getComponent<ShapeFactory>()->setFillColor(sf::Color::Magenta);
 
-      DAm->getComponent<Transform>()->setPosition(sf::Vector2f(280.0f, 460.0f));
-      DAm->getComponent<Transform>()->setRotation(sf::Vector2f(0.0f, 0.0f));
-      DAm->getComponent<Transform>()->setScale(sf::Vector2f(1.0f, 1.0f));
+      DAm->getComponent<Transform>()->setPosition(Vector2(280.0f, 460.0f));
+      DAm->getComponent<Transform>()->setRotation(Vector2(0.0f, 0.0f));
+      DAm->getComponent<Transform>()->setScale(Vector2(1.0f, 1.0f));
 
       m_actores.push_back(DAm);
       std::cout << "Actor creado: " << actorName << ", total de actores en m_actors: " << m_actores.size() << std::endl;
@@ -189,9 +125,9 @@ GUI::actor(std::vector<EngineUtilities::TSharedPointer<Actor>>& m_actores) {
       DAm->getComponent<ShapeFactory>()->createShape(ShapeType::RECTANGLE);
       DAm->getComponent<ShapeFactory>()->setFillColor(sf::Color::Magenta);
 
-      DAm->getComponent<Transform>()->setPosition(sf::Vector2f(280.0f, 460.0f));
-      DAm->getComponent<Transform>()->setRotation(sf::Vector2f(0.0f, 0.0f));
-      DAm->getComponent<Transform>()->setScale(sf::Vector2f(1.0f, 1.0f));
+      DAm->getComponent<Transform>()->setPosition(Vector2(280.0f, 460.0f));
+      DAm->getComponent<Transform>()->setRotation(Vector2(0.0f, 0.0f));
+      DAm->getComponent<Transform>()->setScale(Vector2(1.0f, 1.0f));
 
       m_actores.push_back(DAm);
       std::cout << "Actor creado: " << actorName << ", total de actores en m_actors: " << m_actores.size() << std::endl;
@@ -212,9 +148,9 @@ GUI::actor(std::vector<EngineUtilities::TSharedPointer<Actor>>& m_actores) {
       DAm->getComponent<ShapeFactory>()->createShape(ShapeType::TRIANGLE);
       DAm->getComponent<ShapeFactory>()->setFillColor(sf::Color::Magenta);
 
-      DAm->getComponent<Transform>()->setPosition(sf::Vector2f(280.0f, 460.0f));
-      DAm->getComponent<Transform>()->setRotation(sf::Vector2f(0.0f, 0.0f));
-      DAm->getComponent<Transform>()->setScale(sf::Vector2f(1.0f, 1.0f));
+      DAm->getComponent<Transform>()->setPosition(Vector2(280.0f, 460.0f));
+      DAm->getComponent<Transform>()->setRotation(Vector2(0.0f, 0.0f));
+      DAm->getComponent<Transform>()->setScale(Vector2(1.0f, 1.0f));
 
       m_actores.push_back(DAm);
       std::cout << "Actor creado: " << actorName << ", total de actores en m_actors: " << m_actores.size() << std::endl;
@@ -224,5 +160,90 @@ GUI::actor(std::vector<EngineUtilities::TSharedPointer<Actor>>& m_actores) {
     }
   }
   ImGui::PopID();
+  ImGui::End();
+}
+
+void GUI::vec3Control(const std::string& label, float* values, float resetValue, float columnWidth) {
+  ImGuiIO& io = ImGui::GetIO();
+  auto boldFont = io.Fonts->Fonts[0];
+
+  ImGui::PushID(label.c_str());
+
+  ImGui::Columns(2);
+  ImGui::SetColumnWidth(0, columnWidth);
+  ImGui::Text(label.c_str());
+  ImGui::NextColumn();
+
+  ImGui::PushMultiItemsWidths(3, ImGui::CalcItemWidth());
+  ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2{ 0, 0 });
+
+  float lineHeight = GImGui->Font->FontSize + GImGui->Style.FramePadding.y * 2.0f;
+  ImVec2 buttonSize = { lineHeight + 3.0f, lineHeight };
+
+  ImGui::PushStyleColor(ImGuiCol_Button, ImVec4{ 0.8f, 0.1f, 0.15f, 1.0f });
+  ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4{ 0.9f, 0.2f, 0.2f, 1.0f });
+  ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4{ 0.8f, 0.1f, 0.15f, 1.0f });
+  ImGui::PushFont(boldFont);
+  if (ImGui::Button("X", buttonSize)) values[0] = resetValue;
+  ImGui::PopFont();
+  ImGui::PopStyleColor(3);
+
+  ImGui::SameLine();
+  ImGui::DragFloat("##X", &values[0], 0.1f, 0.0f, 0.0f, "%.2f");
+  ImGui::PopItemWidth();
+  ImGui::SameLine();
+
+  ImGui::PushStyleColor(ImGuiCol_Button, ImVec4{ 0.2f, 0.7f, 0.2f, 1.0f });
+  ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4{ 0.3f, 0.8f, 0.3f, 1.0f });
+  ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4{ 0.2f, 0.7f, 0.2f, 1.0f });
+  ImGui::PushFont(boldFont);
+  if (ImGui::Button("Y", buttonSize)) values[1] = resetValue;
+  ImGui::PopFont();
+  ImGui::PopStyleColor(3);
+
+  ImGui::SameLine();
+  ImGui::DragFloat("##Y", &values[1], 0.1f, 0.0f, 0.0f, "%.2f");
+  ImGui::PopItemWidth();
+  ImGui::SameLine();
+
+  ImGui::PopStyleVar();
+  ImGui::Columns(1);
+
+  ImGui::PopID();
+}
+
+void GUI::inspector(const std::vector<EngineUtilities::TSharedPointer<Actor>>& m_actores) {
+  ImGui::Begin("Inspector");
+
+  if (selectedActorIndex >= 0 && selectedActorIndex < static_cast<int>(m_actores.size())) {
+    auto& selectedActor = m_actores[selectedActorIndex];
+    if (selectedActor) {
+      ImGui::Separator();
+      ImGui::Text("Propiedades del Actor seleccionado:");
+
+      // Modificación de posición y escala
+      Vector2 position = selectedActor->getComponent<Transform>()->getPosition();
+      if (ImGui::DragFloat2("Position", reinterpret_cast<float*>(&position), 1.0f)) {
+        selectedActor->getComponent<Transform>()->setPosition(position);
+      }
+      Vector2 scale = selectedActor->getComponent<Transform>()->getScale();
+      if (ImGui::DragFloat2("Scale", reinterpret_cast<float*>(&scale), 1.0f)) {
+        selectedActor->getComponent<Transform>()->setScale(scale);
+      }
+
+      Vector2 rotation = selectedActor->getComponent<Transform>()->getRotation();
+      if (ImGui::DragFloat2("Rotation", reinterpret_cast<float*>(&rotation), 1.0f)) {
+        selectedActor->getComponent<Transform>()->setRotation(rotation);
+      }
+
+      static int currentShapeTypeIndex = 0;
+      const char* shapeTypes[] = { "EMPTY", "CIRCLE", "RECTANGLE", "TRIANGLE" };
+
+      if (ImGui::Combo("Shape Type", &currentShapeTypeIndex, shapeTypes, IM_ARRAYSIZE(shapeTypes))) {
+        ShapeType selectedShapeType = static_cast<ShapeType>(currentShapeTypeIndex);
+        selectedActor->getComponent<ShapeFactory>()->createShape(selectedShapeType);
+      }
+    }
+  }
   ImGui::End();
 }

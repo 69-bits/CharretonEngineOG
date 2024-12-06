@@ -79,7 +79,19 @@ public:
   void
   actor(std::vector<EngineUtilities::TSharedPointer<Actor>>& m_actores);
 
+  void
+    vec3Control(const std::string& label,
+      float* values,
+      float resetValues = 0.0f,
+      float columnWidth = 100.0f);
+
+
+
+  void
+    inspector(const std::vector<EngineUtilities::TSharedPointer<Actor>>& m_actor);
+
 private:
+  int selectedActorIndex = -1;
   sf::Texture texture; ///< Textura general usada en la interfaz.
   EngineUtilities::TSharedPointer<Actor> DAm; ///< Puntero compartido a un actor específico (propósito general).
   std::vector<EngineUtilities::TSharedPointer<Actor>> m_actores; ///< Lista de actores manejados en la GUI.

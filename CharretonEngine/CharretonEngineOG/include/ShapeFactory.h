@@ -2,6 +2,7 @@
 #include "Prerequisites.h"
 #include "Component.h"
 #include "Window.h"
+#include "Vector2.h"
 
 /**
  * @class ShapeFactory
@@ -64,7 +65,7 @@ public:
    * @param scl Vector de escala.
    */
   void 
-  setScale(const sf::Vector2f& scl);
+  setScale(const Vector2& scl);
 
   /**
    * @brief Cambia el color de relleno de la forma.
@@ -78,7 +79,7 @@ public:
    * @param position Vector que indica la posición.
    */
   void 
-  setPosition(const sf::Vector2f& position);
+  setPosition(const Vector2& position);
 
   /**
    * @brief Renderiza la forma en la ventana proporcionada.

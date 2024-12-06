@@ -208,14 +208,18 @@
     <ClInclude Include="include\Memory\TStaticPtr.h" />
     <ClInclude Include="include\Memory\TUniquePtr.h" />
     <ClInclude Include="include\Memory\TWeakPointer.h" />
-    <ClInclude Include="include\NotifySingleton.h" />
     <ClInclude Include="include\Prerequisites.h" />
-    <ClInclude Include="include\Rasterizer.h" />
+    <ClInclude Include="include\Services\NotifySingleton.h" />
+    <ClInclude Include="include\Services\ResourceManager.h" />
     <ClInclude Include="include\ShapeFactory.h" />
+    <ClInclude Include="include\Texture.h" />
     <ClInclude Include="include\Transform.h" />
-    <ClInclude Include="include\Vector2.h" />
+    <ClInclude Include="include\Vectors\MathUtility.h" />
+    <ClInclude Include="include\Vectors\Quaternion.h" />
+    <ClInclude Include="include\Vectors\Vector2.h" />
+    <ClInclude Include="include\Vectors\Vector3.h" />
+    <ClInclude Include="include\Vectors\Vector4.h" />
     <ClInclude Include="include\Window.h" />
-    <ClInclude Include="Texture.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

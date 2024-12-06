@@ -30,14 +30,9 @@ public:
     Component(ComponentType::TEXTURE) {
     if (!m_texture.loadFromFile(m_textureName + "." + m_extension)) {
       std::cout << "Error de carga de textura" << std::endl;
-      // Cargar una textura por defecto si falla la primera carga
-      m_textureName = "ErrorTexture";
-      m_extension = "jpg";
-      if (!m_texture.loadFromFile(m_textureName + "." + m_extension)) {
-        std::cout << "Error de carga de textura" << std::endl;
-      }
     }
   }
+
 
   /**
    * @brief Destructor virtual por defecto.
@@ -49,9 +44,17 @@ public:
    * @brief Obtiene la textura cargada.
    * @return Referencia a la textura cargada (`sf::Texture`).
    */
-  sf::Texture& getTexture() {
+  sf::Texture& 
+    getTexture() {
     return m_texture;
   }
+
+  void update(float deltatime) override { // Implementación específica para Texture, si es necesario 
+  }
+
+  void render(Window window) override { // Implementación específica para Texture, si es necesario 
+  }
+
 
 private:
   std::string m_textureName; ///< Nombre del archivo de la textura.

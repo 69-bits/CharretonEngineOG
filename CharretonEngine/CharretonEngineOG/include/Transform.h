@@ -2,6 +2,7 @@
 #include "Prerequisites.h"
 #include "Component.h"
 #include "Window.h"
+#include "Vector2.h"
 
 /**
  * @class Transform
@@ -15,12 +16,15 @@ public:
   /**
    * @brief Constructor por defecto que inicializa la posición en (0,0), la rotación en (0,0) y la escala en (1,1).
    */
-  Transform() : position(0.0f, 0.0f), rotation(0.0f, 0.0f), scale(1.0f, 1.0f), Component(ComponentType::TRANSFORM) {}
+  Transform() : position(0.0f, 0.0f),
+    rotation(0.0f, 0.0f),
+    scale(1.0f, 1.0f),
+    Component(ComponentType::TRANSFORM) {}
 
   /**
    * @brief Destructor virtual por defecto.
    */
-  virtual 
+  virtual
   ~Transform() = default;
 
   /**
@@ -29,7 +33,7 @@ public:
    * Este método se llama cada frame, pero en este caso no tiene implementación específica.
    * @param deltaTime Tiempo transcurrido desde el último frame.
    */
-  void 
+  void
   update(float deltaTime) override {}
 
   /**
@@ -38,21 +42,21 @@ public:
    * No tiene implementación específica en este caso.
    * @param window Ventana donde se renderizaría la transformación.
    */
-  void 
+  void
   render(Window window) override {}
 
   /**
    * @brief Libera recursos asociados al componente de transformación.
    */
-  void 
+  void
   destroy();
 
   /**
    * @brief Establece la posición del objeto.
    * @param _position Nueva posición en la escena.
    */
-  void 
-  setPosition(const sf::Vector2f& _position) {
+  void
+  setPosition(const Vector2& _position) {
     position = _position;
   }
 
@@ -60,8 +64,8 @@ public:
    * @brief Establece la rotación del objeto.
    * @param _rotation Nueva rotación en la escena.
    */
-  void 
-  setRotation(const sf::Vector2f& _rotation) {
+  void
+  setRotation(const Vector2& _rotation) {
     rotation = _rotation;
   }
 
@@ -69,8 +73,8 @@ public:
    * @brief Establece la escala del objeto.
    * @param _scale Nueva escala en la escena.
    */
-  void 
-  setScale(const sf::Vector2f& _scale) {
+  void
+  setScale(const Vector2& _scale) {
     scale = _scale;
   }
 
@@ -85,10 +89,14 @@ public:
    * @param deltaTime Tiempo transcurrido desde el último frame.
    * @param range Distancia mínima a la posición objetivo antes de detenerse.
    */
-  void 
-  Seek(const sf::Vector2f& targetPosition, float speed, float deltaTime, float range) {
-    sf::Vector2f direction = targetPosition - position;
+  void
+  Seek(const Vector2& targetPosition,
+      float speed,
+      float deltaTime,
+      float range) {
+    Vector2 direction = (targetPosition)-position;
     float length = std::sqrt(direction.x * direction.x + direction.y * direction.y);
+
     if (length > range) {
       direction /= length;  // Normaliza el vector
       position += direction * speed * deltaTime;
@@ -99,7 +107,8 @@ public:
    * @brief Obtiene la posición actual del objeto.
    * @return Referencia a la posición actual (`sf::Vector2f`).
    */
-  sf::Vector2f& getPosition() {
+  Vector2&
+  getPosition() {
     return position;
   }
 
@@ -107,21 +116,67 @@ public:
    * @brief Obtiene la rotación actual del objeto.
    * @return Referencia a la rotación actual (`sf::Vector2f`).
    */
-  sf::Vector2f& getRotation() {
+  Vector2&
+  getRotation() {
     return rotation;
   }
 
   /**
    * @brief Obtiene la escala actual del objeto.
-   * @return Referencia a la escala actual (`sf::Vector2f`).
+   * @return Referencia a la escala actual (`Vector2`).
    */
-  sf::Vector2f& getScale() {
-    return scale;
+   /**
+  * @brief Obtiene un puntero a la información de rotación.
+  *
+  * Esta función devuelve un puntero al primer elemento de la variable que almacena
+  * la rotación en el eje x. Esto puede ser útil para operaciones que requieren acceso directo
+  * a la memoria de la rotación, como la manipulación directa o el paso de datos a APIs
+  * gráficas de bajo nivel que requieren punteros.
+  *
+  * @return float* Un puntero al primer componente de la rotación (eje x).
+  */
+  float*
+  getRotationData() {
+    return &rotation.x;
   }
+
+  /**
+   * @brief Obtiene un puntero a la información de escala.
+   *
+   * Similar a getRotationData, esta función devuelve un puntero al primer elemento de la
+   * variable que almacena la escala en el eje x. Es útil para casos donde se necesita
+   * manipulación directa o envío de esta parte de la información de transformación a otras
+   * funciones o sistemas que operan a un nivel más bajo.
+   *
+   * @return float* Un puntero al primer componente de la escala (eje x).
+   */
+  float*
+  getScaleData() {
+    return &scale.x;
+  }
+
+  /**
+   * @brief Establece los valores de transformación para un objeto.
+   *
+   * Esta función actualiza la posición, rotación y escala del objeto basándose en los
+   * vectores proporcionados. Es útil para establecer todas las propiedades de transformación
+   * de una vez, asegurando que todas las actualizaciones de estado se manejen juntas.
+   *
+   * @param pos Vector2 que representa la nueva posición.
+   * @param rot Vector2 que representa la nueva rotación.
+   * @param scl Vector2 que representa la nueva escala.
+   */
+  void
+  setTransform(const Vector2& pos, const Vector2& rot, const Vector2& scl) {
+    position = pos;
+    rotation = rot;
+    scale = scl;
+  }
+
 
 private:
   ShapeFactory* m_shape; ///< Puntero a un componente de `ShapeFactory` asociado (opcional).
-  sf::Vector2f position; ///< Posición del objeto en la escena.
-  sf::Vector2f rotation; ///< Rotación del objeto en la escena.
-  sf::Vector2f scale; ///< Escala del objeto en la escena.
+  Vector2 position; ///< Posición del objeto en la escena.
+  Vector2 rotation; ///< Rotación del objeto en la escena.
+  Vector2 scale; ///< Escala del objeto en la escena.
 };

@@ -3,12 +3,13 @@
 #include "Entity.h"
 #include "ShapeFactory.h"
 #include "Transform.h"
+#include "Window.h"
 
 /**
  * @class Actor
  * @brief Representa un actor en la escena, hereda de la clase Entity y contiene componentes como ShapeFactory y Transform.
  */
-class Actor : Entity {
+class Actor : public Entity {
 public:
   /**
    * @brief Constructor por defecto.
@@ -48,6 +49,18 @@ public:
   destroy();
 
   /**
+  * @brief Función para obtener únicamente el nombre del actor
+  */
+  std::string
+    getName() const;
+
+  /**
+   * @brief Permite la modificación del nombre del actor
+   */
+  void
+    setName(const std::string& newName);
+
+  /**
    * @brief Obtiene un componente específico del actor, basado en el tipo T.
    *
    * Esta función utiliza el tipo de dato especificado como parámetro para buscar
@@ -59,10 +72,10 @@ public:
   template <typename T>
   EngineUtilities::TSharedPointer<T> getComponent();
 
-  std::string m_name = "Actor"; ///< Nombre del actor.
+   std::string m_name = "Actor"; ///< Nombre del actor.
 
 private:
-  // Aquí puedes agregar variables privadas y métodos si es necesario en el futuro
+ 
 };
 
 

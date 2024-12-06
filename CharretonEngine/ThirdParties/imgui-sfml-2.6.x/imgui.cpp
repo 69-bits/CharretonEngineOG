@@ -16721,6 +16721,8 @@ static int StackToolFormatLevelInfo(ImGuiIDStackTool* tool, int n, bool format_f
     return ImFormatString(buf, buf_size, "???");
 }
 
+
+
 // ID Stack Tool: Display UI
 void ImGui::ShowIDStackToolWindow(bool* p_open)
 {

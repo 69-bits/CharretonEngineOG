@@ -3,6 +3,7 @@
 #include "Window.h"
 #include "Actor.h"
 #include "GUI.h"
+#include "Vector2.h"
 
 /**
  * @class BaseApp
@@ -24,33 +25,33 @@ public:
    * @brief Ejecuta la aplicación, generalmente llamada en la función `main`.
    * @return Código de retorno de la aplicación.
    */
-  int 
-  run();
+  int
+    run();
 
   /**
    * @brief Inicializa la aplicación y sus recursos.
    * @return `true` si la inicialización fue exitosa, `false` en caso contrario.
    */
-  bool 
-  initialize();
+  bool
+    initialize();
 
   /**
    * @brief Actualiza el estado de la aplicación en cada frame.
    */
-  void 
-  update();
+  void
+    update();
 
   /**
    * @brief Renderiza el contenido de la aplicación.
    */
-  void 
-  render();
+  void
+    render();
 
   /**
    * @brief Libera los recursos de la aplicación antes de finalizar.
    */
-  void 
-  cleanup();
+  void
+    cleanup();
 
   /**
    * @brief Define un patrón de patrullaje para un actor en forma de círculo.
@@ -61,8 +62,8 @@ public:
    * @param deltaTime Tiempo transcurrido desde el último frame.
    * @param circle Puntero compartido al actor que realizará el patrullaje.
    */
-  void 
-  patrolPattern(float deltaTime, EngineUtilities::TSharedPointer<Actor> circle);
+  void
+    patrolPattern(float deltaTime, EngineUtilities::TSharedPointer<Actor> circle);
 
   /**
    * @brief Obtiene la lista de actores en la aplicación.
@@ -77,13 +78,13 @@ private:
   sf::Texture texture; ///< Textura genérica para elementos visuales.
   GUI m_GUI; ///< Interfaz gráfica de usuario de la aplicación.
 
-  std::vector<sf::Vector2f> waypoints = { ///< Puntos de patrullaje.
-        sf::Vector2f(280.0f, 460.0f),
-        sf::Vector2f(350.0f, 460.0f),
-        sf::Vector2f(400.0f, 50.0f),
-        sf::Vector2f(100.0f, 70.0f),
-        sf::Vector2f(220.0f, 220.0f),
-        sf::Vector2f(50.0f, 460.0f)
+  std::vector<Vector2> waypoints = { ///< Puntos de patrullaje.
+        Vector2(280.0f, 460.0f),
+        Vector2(350.0f, 460.0f),
+        Vector2(400.0f, 50.0f),
+        Vector2(100.0f, 70.0f),
+        Vector2(220.0f, 220.0f),
+        Vector2(50.0f, 460.0f)
   };
   int currentPoint = 0; ///< Índice del punto actual de patrullaje.
 
