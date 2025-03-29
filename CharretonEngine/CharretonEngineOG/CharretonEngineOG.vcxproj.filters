@@ -1,0 +1,168 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Archivos de origen">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Archivos de encabezado">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Archivos de recursos">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Archivos de origen\ECS">
+      <UniqueIdentifier>{4f72d067-26d4-4bd6-88a9-8435f52c5eed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\ECS">
+      <UniqueIdentifier>{d51eccc9-8b08-44c8-97f2-b23cb8dc1122}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\Memory">
+      <UniqueIdentifier>{3171e229-0685-4d43-8420-b3c834bd156e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ImGui">
+      <UniqueIdentifier>{14577b80-f900-4a15-ad0c-998cf6ef23fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\Services">
+      <UniqueIdentifier>{dd638d3c-1ca3-4780-b562-812fd81fc7bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\Vectors">
+      <UniqueIdentifier>{f4f10c8e-03ef-410c-90f4-0242aeed0871}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Actor.cpp">
+      <Filter>Archivos de origen\ECS</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BaseApp.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CharretonEngineOG.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ShapeFactory.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Window.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ThirdParties\imgui-sfml-2.6.x\imgui.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ThirdParties\imgui-sfml-2.6.x\imgui_demo.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ThirdParties\imgui-sfml-2.6.x\imgui_draw.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ThirdParties\imgui-sfml-2.6.x\imgui_tables.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ThirdParties\imgui-sfml-2.6.x\imgui_widgets.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ThirdParties\imgui-sfml-2.6.x\imgui-SFML.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GUI.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\Memory\TSharedPointer.h">
+      <Filter>Archivos de encabezado\Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Memory\TStaticPtr.h">
+      <Filter>Archivos de encabezado\Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Memory\TUniquePtr.h">
+      <Filter>Archivos de encabezado\Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Memory\TWeakPointer.h">
+      <Filter>Archivos de encabezado\Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Component.h">
+      <Filter>Archivos de encabezado\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Entity.h">
+      <Filter>Archivos de encabezado\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Actor.h">
+      <Filter>Archivos de encabezado\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BaseApp.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Prerequisites.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ShapeFactory.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Transform.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Window.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ThirdParties\imgui-sfml-2.6.x\imconfig.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ThirdParties\imgui-sfml-2.6.x\imconfig-SFML.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ThirdParties\imgui-sfml-2.6.x\imgui.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ThirdParties\imgui-sfml-2.6.x\imgui_impl_opengl3_loader.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ThirdParties\imgui-sfml-2.6.x\imgui_internal.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ThirdParties\imgui-sfml-2.6.x\imgui-SFML.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ThirdParties\imgui-sfml-2.6.x\imgui-SFML_export.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ThirdParties\imgui-sfml-2.6.x\imstb_rectpack.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ThirdParties\imgui-sfml-2.6.x\imstb_textedit.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ThirdParties\imgui-sfml-2.6.x\imstb_truetype.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GUI.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Texture.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Vectors\Vector2.h">
+      <Filter>Archivos de encabezado\Vectors</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Vectors\MathUtility.h">
+      <Filter>Archivos de encabezado\Vectors</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Services\ResourceManager.h">
+      <Filter>Archivos de encabezado\Services</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Services\NotifySingleton.h">
+      <Filter>Archivos de encabezado\Services</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Vectors\Vector3.h">
+      <Filter>Archivos de encabezado\Vectors</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Vectors\Vector4.h">
+      <Filter>Archivos de encabezado\Vectors</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Vectors\Quaternion.h">
+      <Filter>Archivos de encabezado\Vectors</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
